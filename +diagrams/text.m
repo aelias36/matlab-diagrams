@@ -1,17 +1,16 @@
-classdef text
+classdef text < handle
     properties
         handle
         loc
     end
 
     methods
-        function obj = text(loc, txt, opts)
+        function obj = text(loc, txt, varargin)
+            diagrams.register_update(obj)
             obj.loc = loc;
-            if ~exist('opts','var')
-             opts = {};
-            end
             [x, y] = ds2fig(loc(1), loc(2), loc(3));
-            obj.handle = annotation('textbox', [x y 0 0], 'String', txt, 'Interpreter','latex', 'EdgeColor',[1 0 0], 'FontSize',14, opts{:});
+            % Use a 2x scaling for everything
+            obj.handle = annotation('textbox', [x y 0 0], 'String', txt, 'Interpreter','latex', 'EdgeColor',[1 0 0], 'FontSize',2*10, varargin{:});
         end
 
         function update(obj)

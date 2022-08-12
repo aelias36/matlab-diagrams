@@ -1,4 +1,4 @@
-classdef cone
+classdef cone < handle
     properties
         line_1
         line_2
@@ -9,6 +9,8 @@ classdef cone
     
     methods
         function obj = cone(p0, p,k)
+            diagrams.register_update(obj)
+
             obj.p0 = p0; obj.p = p; obj.k = k;
             
            
@@ -31,7 +33,7 @@ classdef cone
             % do everything wrt. p_0, only use p_0 for plotting
             center = obj.k*obj.k'*obj.p;
             p_cam = campos(gca)';
-            p_cam_tip = p_cam -obj.p0; 
+            p_cam = p_cam -obj.p0; 
             
             % find equivalent camera position by scaling down (tip - camera) until
             % camera is on plane of top of cone

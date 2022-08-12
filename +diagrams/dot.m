@@ -1,4 +1,4 @@
-classdef dot
+classdef dot < handle
     properties
         an
         loc
@@ -7,9 +7,11 @@ classdef dot
     
     methods
         function obj = dot(loc, varargin)
+            diagrams.register_update(obj)
+
             parser = inputParser;
             addParameter(parser,'Color', [0 0 0]);
-            addParameter(parser, 'MarkerSize', 4)
+            addParameter(parser, 'MarkerSize', 3)
             parse(parser,varargin{:});
 
             obj.size = parser.Results.MarkerSize;

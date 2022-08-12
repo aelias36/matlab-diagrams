@@ -1,4 +1,4 @@
-classdef arrow
+classdef arrow < handle
     properties
         an
         tail
@@ -7,11 +7,14 @@ classdef arrow
     
     methods
         function obj = arrow(tail, head, varargin)
+            diagrams.register_update(obj)
+
             parser = inputParser;
             addParameter(parser,'LineStyle','-');
             addParameter(parser,'HeadStyle','vback2');
             addParameter(parser,'TailStyle','none');
             addParameter(parser,'Color', [0 0 0]);
+            addParameter(parser,'LineWidth', 0.5);
             parse(parser,varargin{:});
 
             plot3(tail(1),tail(2),tail(3)); % zoom figure out enough
@@ -25,7 +28,12 @@ classdef arrow
                 LineStyle=parser.Results.LineStyle, ...
                 Head2Style=parser.Results.HeadStyle, ...
                 Head1Style=parser.Results.TailStyle, ...
-                Color=parser.Results.Color);
+                Color=parser.Results.Color, ...
+                 LineWidth=parser.Results.LineWidth);%, ...
+%                 Head1Length=5, ...
+%                 Head2Length=5, ...
+%                 Head1Width=5, ...
+%                 Head2Width=5);
         end
         
         function update(obj)

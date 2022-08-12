@@ -1,4 +1,4 @@
-classdef cylinder
+classdef cylinder < handle
     properties
         line_1
         line_2
@@ -10,6 +10,8 @@ classdef cylinder
     
     methods
         function obj = cylinder(p0, k, half_length, radius)
+            diagrams.register_update(obj)
+
             obj.p0 = p0; obj.k = k;
             obj.half_length = half_length;
             obj.radius = radius;
