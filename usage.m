@@ -1,29 +1,3 @@
-# MATLAB Diagrams Library
-
-Create paper-quality vector graphics
-
-Capabilities:
-  * Angle Arc   
-  * Arrow 
-  * Cone 
-  * Cylinder
-  * Dot
-  * Line
-  * Perpendical Mark
-  * Plane
-  * Sphere
-  * Text
-
-Depends on:
-  * [ds2fig](https://www.mathworks.com/matlabcentral/fileexchange/43896-3d-data-space-coordinates-to-normalized-figure-coordinates-conversion)
-  * [general robotics toolbox](https://github.com/rpiRobotics/general-robotics-toolbox)
-
-
-<p align="center">
-  <img width="644" height="412" src="https://user-images.githubusercontent.com/4022499/184445889-66569f27-19f2-408c-acd6-d280295f489e.svg">
-</p>
-
-```matlab
 zv = [0;0;0];
 
 k = [0;0;1];
@@ -87,4 +61,3 @@ hold off
 diagrams.redraw()
 
 diagrams.save(h_fig, "example_diagram", "./")
-```
