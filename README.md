@@ -9,7 +9,7 @@ Create paper-quality vector graphics geometry diagrams in 2D and 3D
   * Cylinder
   * Dot
   * Line
-  * Perpendical Mark
+  * Perpendicular Mark
   * Plane
   * Sphere
   * Text
