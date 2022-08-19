@@ -21,12 +21,12 @@ function h_fig = setup()
     axis equal tight off
     camproj('perspective')
 
-    
     % Make axes fill figure (no margins)
     ax = gca;
     set(ax, 'Position', [0 0 1 1]);
     
     h_fig.UserData = {};
     set(h_fig,'KeyPressFcn',@(~,~)diagrams.redraw());
-    
+
+    view(3);
 end

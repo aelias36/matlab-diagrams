@@ -1,4 +1,4 @@
-classdef sphere
+classdef sphere < handle
     properties
         C
         r
@@ -7,6 +7,8 @@ classdef sphere
     
     methods
         function obj = sphere(C, r)
+            diagrams.register_update(obj);
+
             obj.C=C; obj.r=r;
             C = obj.get_curve();
             obj.handle = plot3_mat(C);
