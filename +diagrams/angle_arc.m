@@ -24,13 +24,13 @@ classdef angle_arc < handle
             angles = [0:delta_theta:theta theta];
             C = NaN([3 length(angles)]);
             for i = 1:length(angles)
-                C(:,i) = center+rot(k, angles(i))*(tail-center);
+                C(:,i) = center+diagrams.rot(k, angles(i))*(tail-center);
             end
             obj.C_plot = plot3_mat(C);
 
             % Use a 2D arrow for the head
-            arrow_head = center+rot(k, theta)*(tail-center);
-            arrow_tail = center+rot(k, theta- delta_theta)*(tail-center);
+            arrow_head = center+diagrams.rot(k, theta)*(tail-center);
+            arrow_tail = center+diagrams.rot(k, theta- delta_theta)*(tail-center);
             obj.arrow = diagrams.arrow(arrow_tail, arrow_head, 'LineStyle', 'none');
 
         end
@@ -43,13 +43,13 @@ classdef angle_arc < handle
             angles = [0:delta_theta:obj.theta obj.theta];
             C = NaN([3 length(angles)]);
             for i = 1:length(angles)
-                C(:,i) = obj.center+rot(obj.k, angles(i))*(obj.tail-obj.center);
+                C(:,i) = obj.center+diagrams.rot(obj.k, angles(i))*(obj.tail-obj.center);
             end
             update_plot3_mat(obj.C_plot, C);
 
             % Use a 2D arrow for the head
-            obj.arrow.head = obj.center+rot(obj.k, obj.theta)*(obj.tail-obj.center);
-            obj.arrow.tail = obj.center+rot(obj.k, obj.theta- delta_theta)*(obj.tail-obj.center);
+            obj.arrow.head = obj.center+diagrams.rot(obj.k, obj.theta)*(obj.tail-obj.center);
+            obj.arrow.tail = obj.center+diagrams.rot(obj.k, obj.theta- delta_theta)*(obj.tail-obj.center);
             obj.arrow.update();
             
             % Arrowhead shouldn't be perfectly parallel to the circle
@@ -62,7 +62,7 @@ classdef angle_arc < handle
             set(obj.arrow.an, 'Units', 'points');
             current_len = norm(obj.arrow.an.Position(3:4));
             set(obj.arrow.an, 'Units', 'normalized');
-            arrow_tail = obj.center+rot(obj.k, obj.theta- delta_theta*8/current_len)*(obj.tail-obj.center);
+            arrow_tail = obj.center+diagrams.rot(obj.k, obj.theta- delta_theta*8/current_len)*(obj.tail-obj.center);
             obj.arrow.tail = arrow_tail;
             obj.arrow.update();
 
@@ -72,7 +72,7 @@ classdef angle_arc < handle
             angles = [0:delta_theta:theta_adj theta_adj];
             C = NaN([3 length(angles)]);
             for i = 1:length(angles)
-                C(:,i) = obj.center+rot(obj.k, angles(i))*(obj.tail-obj.center);
+                C(:,i) = obj.center+diagrams.rot(obj.k, angles(i))*(obj.tail-obj.center);
             end
             update_plot3_mat(obj.C_plot, C);
 

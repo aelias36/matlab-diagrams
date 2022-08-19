@@ -47,10 +47,10 @@ classdef cone < handle
             d = norm(p_cam_prog);
             phi = acos(r/d);
             
-            theta_0 = subproblem1_linear(obj.p, p_cam, obj.k);
+            theta_0 = subproblem1(obj.p, p_cam, obj.k);
             
-            V_1 = rot(obj.k,theta_0 + phi)*obj.p;
-            V_2 = rot(obj.k,theta_0 - phi)*obj.p;
+            V_1 = diagrams.rot(obj.k,theta_0 + phi)*obj.p;
+            V_2 = diagrams.rot(obj.k,theta_0 - phi)*obj.p;
         end
     end
 end
@@ -65,4 +65,18 @@ end
 
 function plot3_mat(mat)
 plot3(mat(1,:),mat(2,:),mat(3,:), 'k', 'LineWidth',1.5)
+end
+
+function theta = subproblem1(p1, p2, k)
+%  p2 = diagrams.rot(k, theta)*p1
+
+KxP = cross(k, p1);
+
+A = [KxP -cross(k,KxP)];
+p = p2-k*k'*p1;
+
+x = A'*p;
+
+theta = atan2(x(1),x(2));
+
 end

@@ -53,8 +53,8 @@ classdef cylinder < handle
             p_center_closest = p_center_closest/norm(p_center_closest);
             p_center_closest = p_center_closest * obj.radius;
             
-            V_1 = rot(obj.k, phi)*p_center_closest;
-            V_2 = rot(obj.k,-phi)*p_center_closest;
+            V_1 = diagrams.rot(obj.k, phi)*p_center_closest;
+            V_2 = diagrams.rot(obj.k,-phi)*p_center_closest;
         end
     end
 end

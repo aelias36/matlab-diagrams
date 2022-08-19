@@ -1,7 +1,7 @@
 zv = [0;0;0];
 
 k = [0;0;1];
-p_1 = rot(k, -deg2rad(40))*[1.2;0;2];
+p_1 = diagrams.rot(k, -deg2rad(40))*[1.2;0;2];
 p_2 = [0.4;1.6;0.8];
 
 cone_center = k*k'*p_1;
@@ -47,7 +47,7 @@ diagrams.text(cone_center+p_2_proj, "$A x_{LS}$", ...
     VerticalAlignment = 'bottom', HorizontalAlignment = 'center');
 diagrams.text(cone_center+0.95*p_star, "$A x^\star$", ...
     VerticalAlignment = 'bottom', HorizontalAlignment = 'right', Margin = 0);
-diagrams.text(cone_center+rot(k, theta/2)*A_12*0.6, "$\theta$", ...
+diagrams.text(cone_center+diagrams.rot(k, theta/2)*A_12*0.6, "$\theta$", ...
     VerticalAlignment = 'top', HorizontalAlignment = 'center'); 
 diagrams.text(cone_center/2, "$p_{1_k}$", ...
     VerticalAlignment = 'middle', HorizontalAlignment = 'left'); 
@@ -61,3 +61,17 @@ hold off
 diagrams.redraw()
 %% 
 diagrams.save(h_fig, "example_diagram_3d", "./")
+
+function theta = subproblem1(p1, p2, k)
+%  p2 = diagrams.rot(k, theta)*p1
+
+KxP = cross(k, p1);
+
+A = [KxP -cross(k,KxP)];
+p = p2-k*k'*p1;
+
+x = A'*p;
+
+theta = atan2(x(1),x(2));
+
+end
