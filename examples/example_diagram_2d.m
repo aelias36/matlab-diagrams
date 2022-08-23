@@ -12,8 +12,7 @@ p_int = diagrams.rot(ez, theta)*ex;
 view(2)
 hold on
 
-C = diagrams.gen_circle([0;0;1], [1;0;0]);
-plot3(C(1,:), C(2,:), C(3,:), 'k');
+diagrams.circle(zv, ez, 1);
 
 diagrams.line(-ex, p);
 diagrams.line(zv, p_int);

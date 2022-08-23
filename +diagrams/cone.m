@@ -9,7 +9,7 @@ classdef cone < handle
     
     methods
         function obj = cone(p0, p,k)
-            diagrams.register_update(obj)
+            diagrams.utils.register_update(obj)
 
             obj.p0 = p0; obj.p = p; obj.k = k;
             
@@ -17,16 +17,16 @@ classdef cone < handle
             [V_1, V_2] = obj.line_pos();
             
             % Now plot
-            C = diagrams.gen_circle(k,p);
-            plot3_mat(C+p0)
-            obj.line_1 = line(p0, V_1+p0);
-            obj.line_2 = line(p0, V_2+p0);
+            C = diagrams.utils.gen_circle(k,p);
+            diagrams.utils.plot3_mat(C+p0);
+            obj.line_1 = diagrams.line(p0, V_1+p0);
+            obj.line_2 = diagrams.line(p0, V_2+p0);
         end
         
         function update(obj)
             [V_1, V_2] = obj.line_pos();
-            update_line(obj.line_1, obj.p0, V_1+obj.p0);
-            update_line(obj.line_2, obj.p0, V_2+obj.p0);
+            diagrams.utils.line_update(obj.line_1, obj.p0, V_1+obj.p0);
+            diagrams.utils.line_update(obj.line_2, obj.p0, V_2+obj.p0);
         end
 
         function [V_1, V_2] = line_pos(obj)
@@ -53,18 +53,6 @@ classdef cone < handle
             V_2 = diagrams.rot(obj.k,theta_0 - phi)*obj.p;
         end
     end
-end
-
-function L = line(t,h)
-L = plot3([t(1) h(1)],[t(2) h(2)],[t(3) h(3)], '-k.', 'LineWidth',1.5, 'MarkerSize',1);
-end
-
-function update_line(L, t, h)
-set(L,'XData',[t(1) h(1)],'YData',[t(2) h(2)],'ZData',[t(3) h(3)])
-end
-
-function plot3_mat(mat)
-plot3(mat(1,:),mat(2,:),mat(3,:), 'k', 'LineWidth',1.5)
 end
 
 function theta = subproblem1(p1, p2, k)

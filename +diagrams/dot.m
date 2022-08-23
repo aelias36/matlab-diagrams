@@ -7,7 +7,7 @@ classdef dot < handle
     
     methods
         function obj = dot(loc, varargin)
-            diagrams.register_update(obj)
+            diagrams.utils.register_update(obj)
 
             parser = inputParser;
             addParameter(parser,'Color', [0 0 0]);

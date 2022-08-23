@@ -36,5 +36,9 @@ diagrams.sphere([4;-8;0],1);
 % diagrams.text(loc, txt, vargin);
 diagrams.text([4;0;0], "Text\ $\int{abc}$");
 
+% diagrams.circle(center, axis, radius)
+diagrams.circle([0;-8;0], [0;0;1],  1);
+
+
 hold off
 diagrams.redraw();

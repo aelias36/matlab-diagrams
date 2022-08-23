@@ -6,7 +6,7 @@ classdef text < handle
 
     methods
         function obj = text(loc, txt, varargin)
-            diagrams.register_update(obj)
+            diagrams.utils.register_update(obj)
             obj.loc = loc;
             [x, y] = ds2fig(loc(1), loc(2), loc(3));
             % Use a 2x scaling for everything

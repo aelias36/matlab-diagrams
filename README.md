@@ -5,6 +5,7 @@ Create paper-quality vector graphics geometry diagrams in 2D and 3D
 ### Capabilities
   * Angle Arc   
   * Arrow 
+  * Circle
   * Cone 
   * Cylinder
   * Dot
