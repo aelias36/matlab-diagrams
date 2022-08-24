@@ -22,5 +22,18 @@ Create paper-quality vector graphics geometry diagrams in 2D and 3D
   <img width="544" height="556" src="https://user-images.githubusercontent.com/4022499/185184780-5a7d1ec6-d80b-4ee8-b633-7d02305f479d.svg">
 </p>
 
-### Acknowledgements
-[ds2fig](https://www.mathworks.com/matlabcentral/fileexchange/43896-3d-data-space-coordinates-to-normalized-figure-coordinates-conversion) is used in this library.
+## Instructions
+Download the library code and make sure the `+diagrams` folder is inside a folder in the MATLAB path.
+
+Example code is shown in [`usage.m`](usage.m), as well as in the [`examples`](/examples) folder.
+
+Set up a new figure by running `h_fig = diagrams.setup()`. Then, add graphics objects to the figure by calling the diagrams library, or by using matlab functions like `plot`  and `plot3`.
+
+Certain graphics objects must be redrawn depending on the camera angle. At the end of your script, you should call `diagrams.redraw()`. You can also press any keyboard key to call `diagrams.redraw()` if you're moving the camera position interactively.
+
+To export the figure, call `diagrams.save(h_fig, name, location)`. This will save the figure in both `.eps` and `.svg` format.
+
+The figure is designed to be displayed 3.5 in wide to fit the width of an IEEE journal article. However, there is a 2x scaling factor so that the MATLAB figure window is a reasonable size on a computer screen. To include the figure in LaTeX, you should use `\includegraphics[scale=0.5]{diagram.eps}`.
+
+## Acknowledgements
+[ds2fig](https://www.mathworks.com/matlabcentral/fileexchange/43896-3d-data-space-coordinates-to-normalized-figure-coordinates-conversion)
