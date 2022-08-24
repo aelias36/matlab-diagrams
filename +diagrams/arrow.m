@@ -21,8 +21,8 @@ classdef arrow < handle
             plot3(head(1),head(2),head(3));
 
             obj.tail=tail; obj.head=head;
-            [x_tail, y_tail] = ds2fig(tail(1), tail(2), tail(3));
-            [x_head, y_head] = ds2fig(head(1), head(2), head(3));
+            [x_tail, y_tail] = diagrams.utils.ds2fig.ds2fig(tail(1), tail(2), tail(3));
+            [x_head, y_head] = diagrams.utils.ds2fig.ds2fig(head(1), head(2), head(3));
             obj.an = annotation('doublearrow', ...
                 [x_tail x_head], [y_tail y_head], ...
                 LineStyle=parser.Results.LineStyle, ...
@@ -33,8 +33,8 @@ classdef arrow < handle
         end
         
         function update(obj)
-            [x_tail, y_tail] = ds2fig(obj.tail(1), obj.tail(2), obj.tail(3));
-            [x_head, y_head] = ds2fig(obj.head(1), obj.head(2), obj.head(3));
+            [x_tail, y_tail] = diagrams.utils.ds2fig.ds2fig(obj.tail(1), obj.tail(2), obj.tail(3));
+            [x_head, y_head] = diagrams.utils.ds2fig.ds2fig(obj.head(1), obj.head(2), obj.head(3));
             set(obj.an,'X',[x_tail x_head],'Y',[y_tail y_head]);
         end
 

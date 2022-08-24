@@ -25,7 +25,7 @@ classdef dot < handle
         end
         
         function update(obj)
-            [x, y] = ds2fig(obj.loc(1),obj.loc(2),obj.loc(3));
+            [x, y] = diagrams.utils.ds2fig.ds2fig(obj.loc(1),obj.loc(2),obj.loc(3));
             set(obj.an,'Position', [x y 0 0]);
             set(obj.an, 'Units', 'points')
             old = obj.an.Position;
