@@ -25,7 +25,7 @@ diagrams.arrow(zv, ez*UNIT_SIZE);
 for i = 1:N+1
     if i <= N
         h_i_0(:,i) = R * kin.H(:,i);
-        R = R*rot(kin.H(:,i),theta(i));
+        R = R*diagrams.rot(kin.H(:,i),theta(i));
     end   
 
     if i == 1
