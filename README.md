@@ -8,10 +8,12 @@ Create paper-quality vector graphics geometry diagrams in 2D and 3D
   * Circle
   * Cone 
   * Cylinder
+  * Cylinder Line (for connecting two cylinders)
   * Dot
   * Line
   * Perpendicular Mark
   * Plane
+  * Robot Diagram (compatible with [general-robotics-toolbox](https://github.com/rpiRobotics/general-robotics-toolbox))
   * Sphere
   * Text
 
@@ -34,6 +36,9 @@ Certain graphics objects must be redrawn depending on the camera angle. At the e
 To export the figure, call `diagrams.save(h_fig, name, location)`. This will save the figure in both `.eps` and `.svg` format.
 
 The figure is designed to be displayed 3.5 in wide to fit the width of an IEEE journal article. However, there is a 2x scaling factor so that the MATLAB figure window is a reasonable size on a computer screen. To include the figure in LaTeX, you should use `\includegraphics[scale=0.5]{diagram.eps}`.
+
+## Contributing
+If you have any improvements you'd like to make, or even ideas or requests for improvements, please start a GitHub issue.
 
 ## Acknowledgements
 [ds2fig](https://www.mathworks.com/matlabcentral/fileexchange/43896-3d-data-space-coordinates-to-normalized-figure-coordinates-conversion)
