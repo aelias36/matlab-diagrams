@@ -2,6 +2,8 @@
 
 Create paper-quality vector graphics geometry diagrams in 2D and 3D
 
+[![View MATLAB Diagrams on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/116840-matlab-diagrams)
+
 ### Capabilities
   * Angle Arc   
   * Arrow 
