@@ -42,3 +42,6 @@ diagrams.circle([0;-8;0], [0;0;1],  1);
 
 hold off
 diagrams.redraw();
+
+%% 
+diagrams.save(h_fig, "usage_diagram", "./")
