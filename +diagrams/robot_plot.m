@@ -23,16 +23,18 @@ diagrams.arrow(zv, ez*UNIT_SIZE);
 
 % Calculate fwd kin for all frames
 for i = 1:N+1
-    if i <= N
-        h_i_0(:,i) = R * kin.H(:,i);
-        R = R*diagrams.rot(kin.H(:,i),theta(i));
-    end   
+ 
 
     if i == 1
         p_0i(:,i) = R*kin.P(:,i);
     else
         p_0i(:,i) = p_0i(:,i-1) + R*kin.P(:,i);    
     end
+
+    if i <= N
+        h_i_0(:,i) = R * kin.H(:,i);
+        R = R*diagrams.rot(kin.H(:,i),theta(i));
+    end  
 end
 
 % Draw cylinders for joints
@@ -58,10 +60,10 @@ diagrams.text([0;0;0],   "$\mathcal O _0$");
 for i = 1:N
     diagrams.text(p_0i(:,i),   "$\mathcal O _"+i+"$");
 end
-diagrams.text(p_0i(:,N+1),   "$\mathcal O _T$")
+diagrams.text(p_0i(:,N+1),   "$\mathcal O _T$");
 
 % T frame
-p_0T = p_0i(:,end);
+p_0T = p_0i(:,end)
 R_T = R;
 diagrams.arrow(p_0T, p_0T+R_T*ex*UNIT_SIZE);
 diagrams.arrow(p_0T, p_0T+R_T*ey*UNIT_SIZE);
@@ -70,7 +72,7 @@ diagrams.arrow(p_0T, p_0T+R_T*ez*UNIT_SIZE);
 % Arrows and labels for joint vectors
 for i = 1:N
     diagrams.arrow(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH,   p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE);
-    diagrams.text(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE, "$h_"+i+"$")
+    diagrams.text(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE, "$h_"+i+"$");
 end
 
 end
