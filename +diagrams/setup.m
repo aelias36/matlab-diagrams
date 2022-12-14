@@ -1,10 +1,29 @@
-function h_fig = setup()
+function h_fig = setup(figure_type)
+% diagrams.setup Set up the diagram figure window
+%   h_fig = diagrams.setup() sets up the window for IEEE figures (3.5 in)
+%   and returns a handle to the figure
+%
+%   h_fig = diagrams.setup("sagepub") sets up the window for Sage column
+%   width (3 in)
+
+    if nargin < 1
+        figure_type = "IEEE";
+    end
+
     h_fig = figure(1);
     clf(h_fig,'reset')
-
-    % https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/resolution-and-size/
-    % Use a 2x scaling for everything
-    figure_size = 2*[3.5 5];
+    
+    if strcmpi(figure_type, "IEEE")
+        % https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/resolution-and-size/
+        % Use a 2x scaling for everything
+        figure_size = 2*[3.5 5];
+    elseif strcmpi(figure_type, "sagepub")
+        % https://journals.sagepub.com/author-instructions/ijr
+        % Use a 2x scaling for everything
+        figure_size = 2*[3 4];
+    else
+        error("Wrong figure type!")
+    end
     
     set(h_fig,'Visible','on')
     set(h_fig,'color','w');
