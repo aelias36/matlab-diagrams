@@ -5,6 +5,8 @@ function h_fig = setup(figure_type)
 %
 %   h_fig = diagrams.setup("sagepub") sets up the window for Sage column
 %   width (3 in)
+%   h_fig = diagrams.setup("sagepub_half") sets up the window for half Sage
+%   column width (3 in / 2 = 1.5 in)
 
     if nargin < 1
         figure_type = "IEEE";
@@ -21,6 +23,8 @@ function h_fig = setup(figure_type)
         % https://journals.sagepub.com/author-instructions/ijr
         % Use a 2x scaling for everything
         figure_size = 2*[3 4];
+    elseif strcmpi(figure_type, "sagepub_half") % Half column, 12pt space (\hspace{12pt})
+        figure_size = 2*[3-(1/6)/2 4]/2; % 1/6 in = 12pt
     else
         error("Wrong figure type!")
     end
