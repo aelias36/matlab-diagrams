@@ -1,12 +1,28 @@
-function robot_plot(kin, theta)
+function robot_plot(kin, theta, varargin)
 ex = [1;0;0];
 ey = [0;1;0];
 ez = [0;0;1];
 zv = [0;0;0];
 
-UNIT_SIZE = 0.75;
-CYL_HALF_LENGTH = 0.5;
-CYL_RADIUS = 0.25;
+p = inputParser;
+addOptional(p,'unit_size',0.75);
+addOptional(p,'cyl_half_length',0.5);
+addOptional(p,'cyl_radius',0.25);
+addOptional(p,'show_arrows',true);
+addOptional(p,'show_arrow_labels',true);
+addOptional(p,'show_joint_labels',true);
+addOptional(p,'show_base_label',true);
+addOptional(p,'show_task_label',true);
+parse(p,varargin{:});
+
+UNIT_SIZE = p.Results.unit_size;
+CYL_HALF_LENGTH = p.Results.cyl_half_length;
+CYL_RADIUS = p.Results.cyl_radius;
+SHOW_ARROWS = p.Results.show_arrows;
+SHOW_ARROW_LABELS = p.Results.show_arrow_labels;
+SHOW_JOINT_LABELS = p.Results.show_joint_labels;
+SHOW_BASE_LABEL = p.Results.show_base_label;
+SHOW_TASK_LABEL = p.Results.show_task_label;
 
 N = numel(kin.joint_type);
 
@@ -56,14 +72,20 @@ for i = 1:N+1
 end
 
 % Label frames
-diagrams.text([0;0;0],   "$\mathcal O _0$");
-for i = 1:N
-    diagrams.text(p_0i(:,i),   "$\mathcal O _"+i+"$");
+if SHOW_BASE_LABEL
+    diagrams.text([0;0;0],   "$\mathcal O _0$");
 end
-diagrams.text(p_0i(:,N+1),   "$\mathcal O _T$");
+if SHOW_JOINT_LABELS
+    for i = 1:N
+        diagrams.text(p_0i(:,i),   "$\mathcal O _"+i+"$");
+    end
+end
+if SHOW_TASK_LABEL
+    diagrams.text(p_0i(:,N+1),   "$\mathcal O _T$");
+end
 
 % T frame
-p_0T = p_0i(:,end)
+p_0T = p_0i(:,end);
 R_T = R;
 diagrams.arrow(p_0T, p_0T+R_T*ex*UNIT_SIZE);
 diagrams.arrow(p_0T, p_0T+R_T*ey*UNIT_SIZE);
@@ -71,8 +93,12 @@ diagrams.arrow(p_0T, p_0T+R_T*ez*UNIT_SIZE);
 
 % Arrows and labels for joint vectors
 for i = 1:N
-    diagrams.arrow(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH,   p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE);
-    diagrams.text(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE, "$h_"+i+"$");
+    if SHOW_ARROWS
+        diagrams.arrow(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH,   p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE);
+    end
+    if SHOW_ARROW_LABELS
+        diagrams.text(p_0i(:,i) + h_i_0(:,i)*CYL_HALF_LENGTH+h_i_0(:,i)*UNIT_SIZE, "$h_"+i+"$");
+    end
 end
 
 end
