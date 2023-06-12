@@ -13,6 +13,9 @@ addOptional(p,'show_arrow_labels',true);
 addOptional(p,'show_joint_labels',true);
 addOptional(p,'show_base_label',true);
 addOptional(p,'show_task_label',true);
+addOptional(p,'show_dots',true);
+addOptional(p,'show_base_frame',true);
+addOptional(p,'show_task_frame',true);
 parse(p,varargin{:});
 
 UNIT_SIZE = p.Results.unit_size;
@@ -23,6 +26,10 @@ SHOW_ARROW_LABELS = p.Results.show_arrow_labels;
 SHOW_JOINT_LABELS = p.Results.show_joint_labels;
 SHOW_BASE_LABEL = p.Results.show_base_label;
 SHOW_TASK_LABEL = p.Results.show_task_label;
+SHOW_DOTS = p.Results.show_dots;
+SHOW_BASE_FRAME = p.Results.show_base_frame;
+SHOW_TASK_FRAME = p.Results.show_task_frame;
+
 
 N = numel(kin.joint_type);
 
@@ -33,14 +40,14 @@ h_i_0 = NaN([3 N]);
 h_i_0(:,1) = kin.H(:,1);
 
 % 0 frame
-diagrams.arrow(zv, ex*UNIT_SIZE);
-diagrams.arrow(zv, ey*UNIT_SIZE);
-diagrams.arrow(zv, ez*UNIT_SIZE);
+if SHOW_BASE_FRAME
+    diagrams.arrow(zv, ex*UNIT_SIZE);
+    diagrams.arrow(zv, ey*UNIT_SIZE);
+    diagrams.arrow(zv, ez*UNIT_SIZE);
+end
 
 % Calculate fwd kin for all frames
 for i = 1:N+1
- 
-
     if i == 1
         p_0i(:,i) = R*kin.P(:,i);
     else
@@ -67,8 +74,10 @@ p_short = diagrams.utils.shorten_to_cylinder(c{end}, p_0i(:,N+1));
 diagrams.line(p_short, p_0i(:,N+1), LineWidth=8, color=diagrams.colors.blue);
 
 % Dots at frames
-for i = 1:N+1
-    diagrams.dot(p_0i(:,i), 'color', diagrams.colors.red);
+if SHOW_DOTS
+    for i = 1:N+1
+        diagrams.dot(p_0i(:,i), 'color', diagrams.colors.red);
+    end
 end
 
 % Label frames
@@ -85,11 +94,13 @@ if SHOW_TASK_LABEL
 end
 
 % T frame
-p_0T = p_0i(:,end);
-R_T = R;
-diagrams.arrow(p_0T, p_0T+R_T*ex*UNIT_SIZE);
-diagrams.arrow(p_0T, p_0T+R_T*ey*UNIT_SIZE);
-diagrams.arrow(p_0T, p_0T+R_T*ez*UNIT_SIZE);
+if SHOW_TASK_FRAME
+    p_0T = p_0i(:,end);
+    R_T = R;
+    diagrams.arrow(p_0T, p_0T+R_T*ex*UNIT_SIZE);
+    diagrams.arrow(p_0T, p_0T+R_T*ey*UNIT_SIZE);
+    diagrams.arrow(p_0T, p_0T+R_T*ez*UNIT_SIZE);
+end
 
 % Arrows and labels for joint vectors
 for i = 1:N

@@ -7,15 +7,19 @@ function h_fig = setup(figure_type)
 %   width (3 in)
 %   h_fig = diagrams.setup("sagepub_half") sets up the window for half Sage
 %   column width (3 in / 2 = 1.5 in)
+%   h_fig = diagrams.setup([width height]) sets up a custom window (inches)
+%   The window displayed will be twice this width and height
 
     if nargin < 1
         figure_type = "IEEE";
     end
 
-    h_fig = figure(1);
+    h_fig = figure(10);
     clf(h_fig,'reset')
-    
-    if strcmpi(figure_type, "IEEE")
+
+    if all(size(figure_type)==[1 2])
+        figure_size = 2*figure_type;
+    elseif strcmpi(figure_type, "IEEE")
         % https://journals.ieeeauthorcenter.ieee.org/create-your-ieee-journal-article/create-graphics-for-your-article/resolution-and-size/
         % Use a 2x scaling for everything
         figure_size = 2*[3.5 5];
