@@ -9,7 +9,7 @@ classdef cylinder < handle
     end
     
     methods
-        function obj = cylinder(p0, k, half_length, radius)
+        function obj = cylinder(p0, k, half_length, radius, varargin)
             diagrams.utils.register_update(obj)
 
             obj.p0 = p0; obj.k = k;
@@ -22,10 +22,10 @@ classdef cylinder < handle
             radius_vec = radius*diagrams.utils.perp_vector(k);
             C_pos = diagrams.utils.gen_circle(k,  k*half_length+radius_vec);
             C_neg = diagrams.utils.gen_circle(k, -k*half_length+radius_vec);
-            diagrams.utils.plot3_mat(C_pos+p0);
-            diagrams.utils.plot3_mat(C_neg+p0);
-            obj.line_1 = diagrams.line(V_1+p0+k*half_length, V_1+p0-k*half_length);
-            obj.line_2 = diagrams.line(V_2+p0+k*half_length, V_2+p0-k*half_length);
+            diagrams.utils.plot3_mat(C_pos+p0, varargin{:});
+            diagrams.utils.plot3_mat(C_neg+p0, varargin{:});
+            obj.line_1 = diagrams.line(V_1+p0+k*half_length, V_1+p0-k*half_length, varargin{:});
+            obj.line_2 = diagrams.line(V_2+p0+k*half_length, V_2+p0-k*half_length, varargin{:});
         end
         
         function update(obj)

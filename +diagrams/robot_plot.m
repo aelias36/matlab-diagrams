@@ -4,6 +4,8 @@ ey = [0;1;0];
 ez = [0;0;1];
 zv = [0;0;0];
 
+N = numel(kin.joint_type);
+
 p = inputParser;
 addOptional(p,'unit_size',0.75);
 addOptional(p,'cyl_half_length',0.5);
@@ -16,6 +18,10 @@ addOptional(p,'show_task_label',true);
 addOptional(p,'show_dots',true);
 addOptional(p,'show_base_frame',true);
 addOptional(p,'show_task_frame',true);
+addOptional(p,'cylinder_color',[0 0 0]);
+addOptional(p,'link_color',diagrams.colors.blue);
+addOptional(p,'cylinder_show_list',1:N);
+addOptional(p,'link_show_list',1:(N+1));
 parse(p,varargin{:});
 
 UNIT_SIZE = p.Results.unit_size;
@@ -29,9 +35,11 @@ SHOW_TASK_LABEL = p.Results.show_task_label;
 SHOW_DOTS = p.Results.show_dots;
 SHOW_BASE_FRAME = p.Results.show_base_frame;
 SHOW_TASK_FRAME = p.Results.show_task_frame;
+CYLINDER_COLOR = p.Results.cylinder_color;
+LINK_COLOR = p.Results.link_color;
+CYLINDER_SHOW_LIST = p.Results.cylinder_show_list;
+LINK_SHOW_LIST = p.Results.link_show_list;
 
-
-N = numel(kin.joint_type);
 
 p_0i = NaN([3 N+1]);
 p_0i(:,1) = kin.P(:,1);
@@ -63,15 +71,25 @@ end
 % Draw cylinders for joints
 c = cell([N 1]);
 for i = 1:N
-    c{i} = diagrams.cylinder(p_0i(:,i), h_i_0(:,i), CYL_HALF_LENGTH, CYL_RADIUS);
+    if any(i==CYLINDER_SHOW_LIST)
+        extra_args = {};
+    else
+        extra_args = {'LineStyle', 'none', 'Marker', 'none'};
+    end
+    c{i} = diagrams.cylinder(p_0i(:,i), h_i_0(:,i), CYL_HALF_LENGTH, CYL_RADIUS, extra_args{:}, color=CYLINDER_COLOR);
 end
 
 % Connect cylinders with lines
 for i = 1:N-1
-    diagrams.cylinder_line(c{i}, c{i+1}, LineWidth=8, color=diagrams.colors.blue);
+    if any(i==LINK_SHOW_LIST)
+        diagrams.cylinder_line(c{i}, c{i+1}, LineWidth=8, color=LINK_COLOR);
+    end    
 end
 p_short = diagrams.utils.shorten_to_cylinder(c{end}, p_0i(:,N+1));
-diagrams.line(p_short, p_0i(:,N+1), LineWidth=8, color=diagrams.colors.blue);
+if any((N+1)==LINK_SHOW_LIST)
+    diagrams.line(p_short, p_0i(:,N+1), LineWidth=8, color=LINK_COLOR);
+end
+
 
 % Dots at frames
 if SHOW_DOTS

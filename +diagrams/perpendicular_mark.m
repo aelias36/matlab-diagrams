@@ -1,5 +1,10 @@
-function perpendicular_mark(c, v1, v2)
-W = 0.3;
+function perpendicular_mark(c, v1, v2, varargin)
+
+p = inputParser;
+addOptional(p,'width',0.3);
+parse(p,varargin{:});
+
+W = p.Results.width;
 
 v1 = v1 / norm(v1) * W;
 v2 = v2 / norm(v2) * W;
