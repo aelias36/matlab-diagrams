@@ -53,17 +53,36 @@ for %%I in (*.eps) do (
 Then, you can include the PDF file using  `\includegraphics[scale=0.5, clip]{diagram-converted-to.pdf}`
 
 ## Creating GIFs
-
+### Method 1: `exportgraphics()`
 To make sure the gif stays the same size, make a rectangle that fills the whole frame.
 ```MATLAB
 annotation('rectangle',[0 0 1 1]);
 ```
-
 You may want to use `campos()`, `camva()`, and `camtarget()` to lock the camera view.
 
 At the end of the animation loop, use `exportgraphics` to save each frame to a file.
 ```MATLAB
 exportgraphics(gca, "filename.gif", "Append", i ~= 1)
+```
+### Method 2: `imwrite()`
+This method gives more control over delay time and other options.
+```MATLAB
+filename = "file_name.gif";
+clear im
+for i = 1:N
+    % Code here
+    frame = getframe(h_fig);
+    im{i} = frame2im(frame);
+end
+
+for idx = 1:length(im)
+    [A, map] = rgb2ind(im{idx}, 256);
+    if idx == 1
+        imwrite(A, map, filename, "gif", "LoopCount", Inf, "DelayTime", 0.5);
+    else
+        imwrite(A, map, filename, "gif", "WriteMode", "append", "DelayTime", 0.5);
+    end
+end
 ```
 
 ## Contributing
