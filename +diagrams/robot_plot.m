@@ -59,12 +59,18 @@ for i = 1:N+1
     if i == 1
         p_0i(:,i) = R*kin.P(:,i);
     else
-        p_0i(:,i) = p_0i(:,i-1) + R*kin.P(:,i);    
+        if kin.joint_type(i-1) == 0 % revolute
+            p_0i(:,i) = p_0i(:,i-1) + R*kin.P(:,i);    
+        else % prismatic
+            p_0i(:,i) = p_0i(:,i-1) + kin.P(:,i) + theta(i-1)*kin.H(:,i-1);
+        end
     end
 
     if i <= N
         h_i_0(:,i) = R * kin.H(:,i);
-        R = R*diagrams.rot(kin.H(:,i),theta(i));
+        if  kin.joint_type(i) == 0 % revolute
+            R = R*diagrams.rot(kin.H(:,i),theta(i));
+        end
     end  
 end
 
