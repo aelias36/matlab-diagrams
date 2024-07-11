@@ -62,7 +62,7 @@ for i = 1:N+1
         if kin.joint_type(i-1) == 0 % revolute
             p_0i(:,i) = p_0i(:,i-1) + R*kin.P(:,i);    
         else % prismatic
-            p_0i(:,i) = p_0i(:,i-1) + kin.P(:,i) + theta(i-1)*kin.H(:,i-1);
+            p_0i(:,i) = p_0i(:,i-1) + R*kin.P(:,i) + R*theta(i-1)*kin.H(:,i-1);
         end
     end
 
