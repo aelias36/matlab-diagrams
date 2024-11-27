@@ -7,6 +7,7 @@ zv = [0;0;0];
 N = numel(kin.joint_type);
 
 p = inputParser;
+addOptional(p,'auto_scale',false);
 addOptional(p,'unit_size',0.75);
 addOptional(p,'cyl_half_length',0.5);
 addOptional(p,'cyl_radius',0.25);
@@ -24,6 +25,7 @@ addOptional(p,'cylinder_show_list',1:N);
 addOptional(p,'link_show_list',1:(N+1));
 parse(p,varargin{:});
 
+AUTO_SCALE = p.Results.auto_scale;
 UNIT_SIZE = p.Results.unit_size;
 CYL_HALF_LENGTH = p.Results.cyl_half_length;
 CYL_RADIUS = p.Results.cyl_radius;
@@ -39,6 +41,13 @@ CYLINDER_COLOR = p.Results.cylinder_color;
 LINK_COLOR = p.Results.link_color;
 CYLINDER_SHOW_LIST = p.Results.cylinder_show_list;
 LINK_SHOW_LIST = p.Results.link_show_list;
+
+if AUTO_SCALE
+    L_char = max(vecnorm(kin.P)) / 4;
+    UNIT_SIZE = UNIT_SIZE * L_char;
+    CYL_HALF_LENGTH = CYL_HALF_LENGTH * L_char;
+    CYL_RADIUS = CYL_RADIUS * L_char;
+end
 
 
 p_0i = NaN([3 N+1]);
