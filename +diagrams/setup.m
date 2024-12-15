@@ -44,7 +44,7 @@ function h_fig = setup(figure_type)
     set(h_fig, "Units", "pixels")
     findfigs
 
-    set(h_fig, 'renderer', 'painters')
+    set(h_fig, 'renderer', 'painters') % Forces vector graphics
     axis equal tight off
     camproj('perspective')
 
