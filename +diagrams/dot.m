@@ -12,12 +12,17 @@ classdef dot < handle
             parser = inputParser;
             addParameter(parser,'Color', [0 0 0]);
             addParameter(parser, 'MarkerSize', 3)
+            addParameter(parser, 'Is2D', false)
             parse(parser,varargin{:});
 
             obj.size = parser.Results.MarkerSize;
-
-            plot3(loc(1),loc(2),loc(3)); % zoom figure out enough
-
+            
+            if parser.Results.Is2D
+                plot(loc(1), loc(2));
+            else
+                plot3(loc(1),loc(2),loc(3)); % zoom figure out enough
+            end
+            
             obj.loc=loc;
             obj.an = annotation('ellipse', 'Color',parser.Results.Color, 'FaceColor',parser.Results.Color);
             obj.update();
