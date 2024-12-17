@@ -8,15 +8,13 @@ classdef cone < handle
     end
     
     methods
-        function obj = cone(p0, p,k)
+        function obj = cone(p0, p, k)
             diagrams.utils.register_update(obj)
 
             obj.p0 = p0; obj.p = p; obj.k = k;
             
-           
             [V_1, V_2] = obj.line_pos();
             
-            % Now plot
             C = diagrams.utils.gen_circle(k,p);
             diagrams.utils.plot3_mat(C+p0);
             obj.line_1 = diagrams.line(p0, V_1+p0);
@@ -56,10 +54,10 @@ classdef cone < handle
 end
 
 function theta = subproblem1(p1, p2, k)
-%  p2 = diagrams.rot(k, theta)*p1
-
-KxP = cross(k, p1);
-A = [KxP -cross(k,KxP)];
-x = A'*p2;
-theta = atan2(x(1),x(2));
+    %  p2 = diagrams.rot(k, theta)*p1
+    
+    KxP = cross(k, p1);
+    A = [KxP -cross(k,KxP)];
+    x = A'*p2;
+    theta = atan2(x(1),x(2));
 end
