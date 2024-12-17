@@ -1,5 +1,5 @@
 function plane(center, perp, edge, radius, varargin)
-if numel(radius)==1
+if isscalar(radius)
     radius = radius*[1 1 1 1];
 end
 
