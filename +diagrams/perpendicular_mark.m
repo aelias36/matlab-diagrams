@@ -1,14 +1,16 @@
-function perpendicular_mark(c, v1, v2, varargin)
+function perpendicular_mark(c, v1, v2, opts)
+    arguments
+        c (3,1) double
+        v1 (3,1) double
+        v2 (3,1) double
+        opts.width (1,1) double = 0.3
+    end
 
-p = inputParser;
-addOptional(p,'width',0.3);
-parse(p,varargin{:});
+    W = opts.width;
 
-W = p.Results.width;
+    v1 = v1 / norm(v1) * W;
+    v2 = v2 / norm(v2) * W;
 
-v1 = v1 / norm(v1) * W;
-v2 = v2 / norm(v2) * W;
-
-path = c + [v1 v1+v2 v2];
-plot3(path(1,:), path(2,:),path(3,:), 'k');
+    path = c + [v1 v1+v2 v2];
+    plot3(path(1,:), path(2,:), path(3,:), 'k');
 end
