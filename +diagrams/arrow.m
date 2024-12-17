@@ -7,35 +7,40 @@ classdef arrow < handle
     end
     
     methods
-        function obj = arrow(tail, head, varargin)
-            diagrams.utils.register_update(obj)
-
-            parser = inputParser;
-            addParameter(parser,'LineStyle','-');
-            addParameter(parser,'HeadStyle','vback2');
-            addParameter(parser,'TailStyle','none');
-            addParameter(parser,'Color', [0 0 0]);
-            addParameter(parser,'LineWidth', 0.5);
-            parse(parser,varargin{:});
-
-            plot3(tail(1),tail(2),tail(3)); % zoom figure out enough
-            plot3(head(1),head(2),head(3));
+        function obj = arrow(tail, head, opts)
+            arguments
+                tail (3,1) double
+                head (3,1) double
+                opts.LineStyle (1,1) string = '-'
+                opts.HeadStyle (1,1) string = 'vback2'
+                opts.TailStyle (1,1) string = 'none'
+                opts.Color (1,3) double = [0 0 0]
+                opts.LineWidth (1,1) double = 0.5
+            end
+        
+            diagrams.utils.register_update(obj);
+        
+            plot3(tail(1), tail(2), tail(3)); % zoom figure out enough
+            plot3(head(1), head(2), head(3));
+        
             obj.h_line = diagrams.line(tail, head, ...
-                LineStyle=parser.Results.LineStyle, ...
-                LineWidth=parser.Results.LineWidth, ...
-                Color=parser.Results.Color);
-
-            obj.tail=tail; obj.head=head;
+                LineStyle=opts.LineStyle, ...
+                LineWidth=opts.LineWidth, ...
+                Color=opts.Color);
+        
+            obj.tail = tail;
+            obj.head = head;
+        
             [x_tail, y_tail] = diagrams.utils.ds2fig.ds2fig(tail(1), tail(2), tail(3));
             [x_head, y_head] = diagrams.utils.ds2fig.ds2fig(head(1), head(2), head(3));
+        
             obj.an = annotation('doublearrow', ...
                 [x_tail x_head], [y_tail y_head], ...
-                LineStyle='none',...%parser.Results.LineStyle, ...
-                Head2Style=parser.Results.HeadStyle, ...
-                Head1Style=parser.Results.TailStyle, ...
-                Color=parser.Results.Color, ...
-                 LineWidth=parser.Results.LineWidth);
-
+                LineStyle='none', ...
+                Head2Style=opts.HeadStyle, ...
+                Head1Style=opts.TailStyle, ...
+                Color=opts.Color, ...
+                LineWidth=opts.LineWidth);
         end
         
         function update(obj)
