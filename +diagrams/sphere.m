@@ -9,7 +9,9 @@ classdef sphere < handle
         function obj = sphere(C, r)
             diagrams.utils.register_update(obj);
 
-            obj.C=C; obj.r=r;
+            obj.C = C;
+            obj.r = r;
+            
             C = obj.get_curve();
             obj.handle = diagrams.utils.plot3_mat(C);
         end
