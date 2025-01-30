@@ -41,13 +41,13 @@ To export the figure, call `diagrams.save(h_fig, name, location)`. This will sav
 The figure is designed to be displayed 3.5 in wide to fit the width of an IEEE journal article. However, there is a 2x scaling factor so that the MATLAB figure window is a reasonable size on a computer screen. To include the figure in LaTeX, you should use `\includegraphics[scale=0.5, clip]{diagram.eps}`. Adding `clip` makes sure any white space doesn't overlap with text.
 
 If you're submitting to arXiv and want to use pdfLaTeX, you will need to convert the `eps` files to `pdf` files. [arXiv doesn't do this conversion](https://info.arxiv.org/help/submit_tex.html#figure-inclusion-in-latex-submissions). If you have miktex installed, run the command
-```bash
-miktex-epstopdf --outfile=diagram-converted-to.pdf diagram.eps
+```bat
+epstopdf --outfile=diagram-converted-to.pdf diagram.eps
 ```
-Or, run the following bash file on Windows:
-```bash
+Or, run the following `.bat` file on Windows:
+```bat
 for %%I in (*.eps) do (
-    miktex-epstopdf --outfile="%%~nI-converted-to.pdf" "%%I"
+    epstopdf --outfile="%%~nI-converted-to.pdf" "%%I"
 )
 ```
 Then, you can include the PDF file using  `\includegraphics[scale=0.5, clip]{diagram-converted-to.pdf}`
