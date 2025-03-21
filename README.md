@@ -22,17 +22,17 @@ Create paper-quality vector graphics geometry diagrams in 2D and 3D
 ## Papers using this library
 Open an issue to add your paper to this list!
 
-#### [IK-Geo: Unified robot inverse kinematics using subproblem decomposition](https://www.sciencedirect.com/science/article/pii/S0094114X25000606)
-Alexander J. Elias and John T. Wen, 2025
-Mechanism and Machine Theory 209, 105971
+[IK-Geo: Unified robot inverse kinematics using subproblem decomposition](https://www.sciencedirect.com/science/article/pii/S0094114X25000606)\
+Alexander J. Elias and John T. Wen\
+Mechanism and Machine Theory 209, 105971, 2025
 
-#### [Redundancy parameterization and inverse kinematics of 7-DOF revolute manipulators](https://www.sciencedirect.com/science/article/pii/S0094114X24002519)
-Alexander J. Elias and John T. Wen, 2024
-Mechanism and Machine Theory 204, 105824
+[Redundancy parameterization and inverse kinematics of 7-DOF revolute manipulators](https://www.sciencedirect.com/science/article/pii/S0094114X24002519)\
+Alexander J. Elias and John T. Wen\
+Mechanism and Machine Theory 204, 105824, 2024
 
-#### [Path Planning and Optimization for Cuspidal 6R Manipulators](https://arxiv.org/abs/2501.18505)
-Alexander J. Elias and John T. Wen, 2025
-arXiv preprint arXiv:2501.18505
+[Path Planning and Optimization for Cuspidal 6R Manipulators](https://arxiv.org/abs/2501.18505)\
+Alexander J. Elias and John T. Wen\
+arXiv preprint arXiv:2501.18505, 2025
 
 
 ## Examples
