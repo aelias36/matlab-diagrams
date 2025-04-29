@@ -29,6 +29,8 @@ function h_fig = setup(figure_type)
         figure_size = 2*[3 4];
     elseif strcmpi(figure_type, "sagepub_half") % Half column, 12pt space (\hspace{12pt})
         figure_size = 2*[3-(1/6)/2 4]/2; % 1/6 in = 12pt
+    elseif strcmpi(figure_type, "els_half") % Elsevier half page, 12pt space (\hspace{12pt})
+        figure_size = 2*[6.5/2-(1/6)/2 4]; % 1/6 in = 12pt
     else
         error("Wrong figure type!")
     end
